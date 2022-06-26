@@ -1,0 +1,20 @@
+    
+    // finding parent using path compression
+    int findParent(int a, vector<int>&parent)
+    {
+        if(a== parent[a]) return a;
+        return parent[a]=  findParent(parent[a], parent  );
+    }
+
+   // union of two nodes optimally by using rank 
+    bool unionn(int a, int b, vector<int> & parent, vector<int>& rank)
+    {
+        a= findParent(a, parent);
+        b= findParent(b,parent);
+        if(a == b) return false;
+
+        if(rank[a] < rank[b]) parent[a]= b;
+        else if(rank[a] > rank[b]) parent[b]=a;
+        else parent[a]=b, rank[b]++;
+        return 1   ;
+    }
